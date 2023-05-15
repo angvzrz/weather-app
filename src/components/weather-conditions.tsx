@@ -30,7 +30,7 @@ export function WeatherConditions({ weather }: WeatherConditionsProps) {
         shadow={false}
         className="mx-0 flex flex-col items-center gap-4 pb-8 pt-0"
       >
-        <div>
+        <div className='text-center'>
           <Avatar size="xxl" variant="circular" src={iconSrc} alt={main} />
           <Typography variant="h3">{main}</Typography>
         </div>

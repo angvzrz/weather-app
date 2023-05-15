@@ -10,7 +10,14 @@ const Home: NextPage = () => {
   const [forecast, setForecast] = useState<IWeather>();
 
   useEffect(() => {
-    getWeather('london')
+    const lastSearch: string | null = localStorage.getItem('lastSearchQuery');
+    let initialCity = 'london';
+
+    if (lastSearch) {
+      initialCity = lastSearch;
+    }
+
+    getWeather(initialCity)
       .then((response) => setForecast(response))
       .catch((error) => console.error(error));
   }, []);
