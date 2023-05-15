@@ -1,5 +1,6 @@
-import { type NextPage } from "next";
-import Head from "next/head";
+import { Header } from '@/components/header';
+import { type NextPage } from 'next';
+import Head from 'next/head';
 
 const Home: NextPage = () => {
   return (
@@ -12,6 +13,7 @@ const Home: NextPage = () => {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <Header />
       <main className="flex min-h-screen flex-col items-center justify-center"></main>
     </>
   );
