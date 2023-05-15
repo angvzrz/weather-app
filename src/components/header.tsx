@@ -1,6 +1,5 @@
-import { getWeather } from '@/services/weather-api';
-import { Button, Input, Navbar, Typography } from '@material-tailwind/react';
-import { useState } from 'react';
+import { Navbar, Typography } from '@material-tailwind/react';
+import { Search } from './search';
 import type { IWeather } from 'types/types';
 
 interface HeaderProps {
@@ -8,13 +7,6 @@ interface HeaderProps {
 }
 
 export function Header({ setForecast }: HeaderProps) {
-  const [searchValue, setSearchValue] = useState<string>('');
-  const handleOnClick = () => {
-    getWeather(searchValue)
-      .then((response) => setForecast(response))
-      .catch((error) => console.error(error));
-  };
-
   return (
     <header>
       <Navbar className="mx-auto max-w-screen-xl rounded-none px-4 py-3">
@@ -26,26 +18,7 @@ export function Header({ setForecast }: HeaderProps) {
           >
             <h1>Weather Report</h1>
           </Typography>
-          <div className="relative flex w-full gap-2 md:w-max">
-            <Input
-              type="search"
-              label="Weather in city..."
-              value={searchValue}
-              onChange={(e) => setSearchValue(e.target.value)}
-              className="pr-20"
-              containerProps={{
-                className: 'min-w-[288px]',
-              }}
-            />
-            <Button
-              type="submit"
-              size="sm"
-              onClick={handleOnClick}
-              className="!absolute right-1 top-1 rounded bg-wr-pink"
-            >
-              Search
-            </Button>
-          </div>
+          <Search setForecast={setForecast} />
         </div>
       </Navbar>
     </header>
