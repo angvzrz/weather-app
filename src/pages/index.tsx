@@ -1,8 +1,20 @@
 import { Header } from '@/components/header';
+import { WeatherConditions } from '@/components/weather-conditions';
+import { getWeather } from '@/services/weather-api';
 import { type NextPage } from 'next';
 import Head from 'next/head';
+import { useEffect, useState } from 'react';
+import type { IWeather } from 'types/types';
 
 const Home: NextPage = () => {
+  const [forecast, setForecast] = useState<IWeather>();
+
+  useEffect(() => {
+    getWeather('london')
+      .then((response) => setForecast(response))
+      .catch((error) => console.error(error));
+  }, []);
+
   return (
     <>
       <Head>
@@ -13,8 +25,10 @@ const Home: NextPage = () => {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Header />
-      <main className="flex min-h-screen flex-col items-center justify-center"></main>
+      <Header setForecast={setForecast} />
+      <main className="container mx-auto flex flex-wrap px-5 py-16">
+        {forecast && <WeatherConditions weather={forecast} />}
+      </main>
     </>
   );
 };
