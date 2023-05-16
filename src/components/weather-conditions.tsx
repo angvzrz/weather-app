@@ -3,6 +3,7 @@ import {
   Card,
   CardBody,
   CardHeader,
+  Spinner,
   Typography,
 } from '@material-tailwind/react';
 import type { IWeather } from 'types/types';
@@ -29,7 +30,11 @@ export function WeatherConditions({ weather }: WeatherConditionsProps) {
         className="mx-0 flex flex-col items-center gap-4 pb-8 pt-0"
       >
         <div className="text-center">
-          <Avatar size="xxl" variant="circular" src={iconSrc} alt={main} />
+          {icon ? (
+            <Avatar size="xxl" variant="circular" src={iconSrc} alt={main} />
+          ) : (
+            <Spinner className="h-10 w-10" />
+          )}
           <Typography variant="h3">{main}</Typography>
         </div>
         <div className="flex w-full flex-col items-center gap-0.5">
