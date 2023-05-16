@@ -21,7 +21,10 @@ export function WeatherConditions({ weather }: WeatherConditionsProps) {
   return (
     <Card
       shadow={true}
-      className="w-full max-w-[26rem] bg-gradient-to-r from-cyan-500 to-blue-500 px-6"
+      className="h-4/5 w-full max-w-[26rem] 
+      bg-gradient-to-r from-cyan-500 to-blue-500 
+      px-6 
+      dark:from-wr-pale-blue dark:to-wr-pale-cornflower"
     >
       <CardHeader
         color="transparent"

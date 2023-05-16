@@ -15,7 +15,7 @@ export function DarkModeToggle() {
     <div>
       <Switch
         color="pink"
-        label={<MoonIcon className="w-8" />}
+        label={<MoonIcon className="w-8 dark:fill-wr-pale-blue" />}
         containerProps={{ className: '-mr-2' }}
         onChange={handleChange}
       />
