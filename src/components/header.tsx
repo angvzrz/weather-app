@@ -1,15 +1,11 @@
 import { Navbar, Typography } from '@material-tailwind/react';
-import { Search } from './search';
-import type { IWeather } from 'types/types';
-import { DarkModeToggle } from './dark-mode-toggle';
+import type { ReactNode } from 'react';
 
 interface HeaderProps {
-  setForecast: (forecast: IWeather) => void;
-  setError: (message: string) => void;
-  setShowAlert: (value: boolean) => void;
+  children?: ReactNode;
 }
 
-export function Header({ setForecast, setError, setShowAlert }: HeaderProps) {
+export function Header({ children }: HeaderProps) {
   return (
     <header>
       <Navbar
@@ -26,12 +22,7 @@ export function Header({ setForecast, setError, setShowAlert }: HeaderProps) {
               Weather Report
             </h1>
           </Typography>
-          <DarkModeToggle />
-          <Search
-            setForecast={setForecast}
-            setError={setError}
-            setShowAlert={setShowAlert}
-          />
+          {children}
         </div>
       </Navbar>
     </header>

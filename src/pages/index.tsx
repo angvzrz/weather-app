@@ -6,9 +6,12 @@ import { getWeather } from '@/services/weather-api';
 import { useEffect, useState } from 'react';
 import type { NextPage } from 'next';
 import type { IWeather } from 'types/types';
+import { WeatherForecast } from '@/components/weather-forecast';
+import { DarkModeToggle } from '@/components/dark-mode-toggle';
+import { Search } from '@/components/search';
 
 const Home: NextPage = () => {
-  const [forecast, setForecast] = useState<IWeather>({
+  const [currentWeather, setCurrentWeather] = useState<IWeather>({
     place: '',
     temp: 0,
     main: '',
@@ -19,17 +22,19 @@ const Home: NextPage = () => {
   });
   const [error, setError] = useState<string>('');
   const [showAlert, setShowAlert] = useState<boolean>(false);
+  const [city, setCity] = useState<string>('London');
 
   useEffect(() => {
     const lastSearch: string | null = localStorage.getItem('lastSearchQuery');
     let initialCity = 'london';
 
     if (lastSearch) {
+      setCity(lastSearch);
       initialCity = lastSearch;
     }
 
     getWeather(initialCity)
-      .then((response) => setForecast(response))
+      .then((response) => setCurrentWeather(response))
       .catch(() => {
         setError('An error ocurred in the server. Please try later');
         setShowAlert(true);
@@ -46,11 +51,15 @@ const Home: NextPage = () => {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Header
-        setForecast={setForecast}
-        setError={setError}
-        setShowAlert={setShowAlert}
-      />
+      <Header>
+        <DarkModeToggle />
+        <Search
+          setCurrentWeather={setCurrentWeather}
+          setError={setError}
+          setShowAlert={setShowAlert}
+          setCity={setCity}
+        />
+      </Header>
       <main className="mx-auto flex h-screen flex-wrap px-4 py-8 dark:bg-wr-oxford-blue">
         {showAlert && (
           <ErrorAlert
@@ -59,7 +68,8 @@ const Home: NextPage = () => {
             setIsOpen={setShowAlert}
           />
         )}
-        <WeatherConditions weather={forecast} />
+        <WeatherConditions weather={currentWeather} />
+        <WeatherForecast city={city} />
       </main>
     </>
   );
