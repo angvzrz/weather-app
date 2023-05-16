@@ -5,24 +5,32 @@ import { type IWeather } from 'types/types';
 import { type AxiosError } from 'axios';
 
 interface SearchProps {
-  setForecast: (forecast: IWeather) => void;
+  setCurrentWeather: (forecast: IWeather) => void;
   setError: (message: string) => void;
   setShowAlert: (value: boolean) => void;
+  setCity: (city: string) => void;
 }
 
-export function Search({ setForecast, setError, setShowAlert }: SearchProps) {
+export function Search({
+  setCurrentWeather,
+  setError,
+  setShowAlert,
+  setCity,
+}: SearchProps) {
   const [searchValue, setSearchValue] = useState<string>('');
 
   const handleOnClick = () => {
     getWeather(searchValue)
       .then((response) => {
-        setForecast(response);
-        localStorage.setItem('lastSearchQuery', searchValue);
+        setCurrentWeather(response);
+        setCity(response.place ?? '');
+        localStorage.setItem('lastSearchQuery', response.place ?? '');
       })
       .catch((error: AxiosError) => {
         if (error.response?.status === 404) {
           setError('That city does not exist. Please try with a different one');
           setShowAlert(true);
+          setCity('');
         }
       });
   };
