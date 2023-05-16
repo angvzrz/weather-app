@@ -18,7 +18,6 @@ export function WeatherConditions({ weather, day }: WeatherConditionsProps) {
     weather;
   const iconUrl: string = process.env.NEXT_PUBLIC_ICON_URL ?? '';
   const iconSrc = `${iconUrl}${icon ?? ''}@4x.png`;
-
   return (
     <Card
       shadow={true}
