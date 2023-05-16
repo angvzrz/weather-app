@@ -51,14 +51,14 @@ const Home: NextPage = () => {
         setError={setError}
         setShowAlert={setShowAlert}
       />
-      {showAlert && (
-        <ErrorAlert
-          message={error}
-          isOpen={showAlert}
-          setIsOpen={setShowAlert}
-        />
-      )}
-      <main className="container mx-auto flex flex-wrap px-5 py-16">
+      <main className="mx-auto flex h-screen flex-wrap px-4 py-8 dark:bg-wr-oxford-blue">
+        {showAlert && (
+          <ErrorAlert
+            message={error}
+            isOpen={showAlert}
+            setIsOpen={setShowAlert}
+          />
+        )}
         <WeatherConditions weather={forecast} />
       </main>
     </>

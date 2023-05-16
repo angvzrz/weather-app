@@ -8,14 +8,12 @@ interface ErrorAlertProps {
 
 export function ErrorAlert({ message, isOpen, setIsOpen }: ErrorAlertProps) {
   return (
-    <>
-      <Alert
-        open={isOpen}
-        onClose={() => setIsOpen(false)}
-        className="bg-wr-pink"
-      >
-        {message}
-      </Alert>
-    </>
+    <Alert
+      open={isOpen}
+      onClose={() => setIsOpen(false)}
+      className="bg-wr-pink"
+    >
+      {message}
+    </Alert>
   );
 }

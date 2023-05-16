@@ -29,11 +29,12 @@ export function Search({ setForecast, setError, setShowAlert }: SearchProps) {
   return (
     <div className="relative flex w-full gap-2 md:w-max">
       <Input
+        color="cyan"
         type="search"
         label="Weather in city..."
         value={searchValue}
         onChange={(e) => setSearchValue(e.target.value)}
-        className="pr-24"
+        className="pr-24 dark:text-white"
         containerProps={{
           className: 'min-w-[288px]',
         }}
