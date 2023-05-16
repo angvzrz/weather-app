@@ -18,7 +18,7 @@ const Home: NextPage = () => {
     icon: '',
   });
   const [error, setError] = useState<string>('');
-  const [showAlert, setShowAlert] = useState<boolean>(true);
+  const [showAlert, setShowAlert] = useState<boolean>(false);
 
   useEffect(() => {
     const lastSearch: string | null = localStorage.getItem('lastSearchQuery');
@@ -32,6 +32,7 @@ const Home: NextPage = () => {
       .then((response) => setForecast(response))
       .catch(() => {
         setError('An error ocurred in the server. Please try later');
+        setShowAlert(true);
       });
   }, []);
 
