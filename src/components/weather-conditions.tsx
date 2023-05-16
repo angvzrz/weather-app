@@ -10,14 +10,14 @@ import type { IWeather } from 'types/types';
 
 interface WeatherConditionsProps {
   weather: IWeather;
+  day?: string;
 }
 
-export function WeatherConditions({ weather }: WeatherConditionsProps) {
+export function WeatherConditions({ weather, day }: WeatherConditionsProps) {
   const { main, description, place, icon, humidity, temp, wind_speed } =
     weather;
-  const iconUrl = process.env.NEXT_PUBLIC_ICON_URL ?? '';
-  const iconSrc = `${iconUrl}${icon}@4x.png`;
-
+  const iconUrl: string = process.env.NEXT_PUBLIC_ICON_URL ?? '';
+  const iconSrc = `${iconUrl}${icon ?? ''}@4x.png`;
   return (
     <Card
       shadow={true}
@@ -32,6 +32,7 @@ export function WeatherConditions({ weather }: WeatherConditionsProps) {
         shadow={false}
         className="mx-0 flex flex-col items-center gap-4 pb-8 pt-0"
       >
+        {day && <h3>{day}</h3>}
         <div className="text-center">
           {icon ? (
             <Avatar size="xxl" variant="circular" src={iconSrc} alt={main} />
@@ -46,7 +47,7 @@ export function WeatherConditions({ weather }: WeatherConditionsProps) {
           <Typography color="white">{description}</Typography>
         </div>
       </CardHeader>
-      <CardBody className="">
+      <CardBody className="py-2">
         <Typography>Humidity: {humidity}</Typography>
         <Typography>Wind Speed: {wind_speed}</Typography>
       </CardBody>
