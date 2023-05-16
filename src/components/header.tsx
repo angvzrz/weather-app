@@ -4,9 +4,11 @@ import type { IWeather } from 'types/types';
 
 interface HeaderProps {
   setForecast: (forecast: IWeather) => void;
+  setError: (message: string) => void;
+  setShowAlert: (value: boolean) => void;
 }
 
-export function Header({ setForecast }: HeaderProps) {
+export function Header({ setForecast, setError, setShowAlert }: HeaderProps) {
   return (
     <header>
       <Navbar className="mx-auto max-w-screen-xl rounded-none px-4 py-3">
@@ -18,7 +20,11 @@ export function Header({ setForecast }: HeaderProps) {
           >
             <h1>Weather Report</h1>
           </Typography>
-          <Search setForecast={setForecast} />
+          <Search
+            setForecast={setForecast}
+            setError={setError}
+            setShowAlert={setShowAlert}
+          />
         </div>
       </Navbar>
     </header>

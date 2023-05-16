@@ -1,21 +1,30 @@
 import { getWeather } from '@/services/weather-api';
 import { Button, Input } from '@material-tailwind/react';
 import { useState } from 'react';
-import type { IWeather } from 'types/types';
+import { type IWeather } from 'types/types';
+import { type AxiosError } from 'axios';
 
 interface SearchProps {
   setForecast: (forecast: IWeather) => void;
+  setError: (message: string) => void;
+  setShowAlert: (value: boolean) => void;
 }
 
-export function Search({ setForecast }: SearchProps) {
+export function Search({ setForecast, setError, setShowAlert }: SearchProps) {
   const [searchValue, setSearchValue] = useState<string>('');
 
   const handleOnClick = () => {
     getWeather(searchValue)
-      .then((response) => setForecast(response))
-      .catch((error) => console.error(error));
-
-    localStorage.setItem('lastSearchQuery', searchValue);
+      .then((response) => {
+        setForecast(response);
+        localStorage.setItem('lastSearchQuery', searchValue);
+      })
+      .catch((error: AxiosError) => {
+        if (error.response?.status === 404) {
+          setError('That city does not exist. Please try with a different one');
+          setShowAlert(true);
+        }
+      });
   };
   return (
     <div className="relative flex w-full gap-2 md:w-max">
