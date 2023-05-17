@@ -13,6 +13,9 @@ module.exports = withMT({
           pink: '#F0587C',
         },
       },
+      screens: {
+        '3xl': '1536px',
+      },
     },
   },
   plugins: [],
