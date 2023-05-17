@@ -60,7 +60,10 @@ const Home: NextPage = () => {
           setCity={setCity}
         />
       </Header>
-      <main className="mx-auto flex h-screen flex-wrap px-4 py-8 dark:bg-wr-oxford-blue">
+      <main
+        className=" flex h-screen flex-wrap items-center px-4 py-8 
+      sm:flex-col sm:flex-nowrap md:px-28 lg:px-40"
+      >
         {showAlert && (
           <ErrorAlert
             message={error}

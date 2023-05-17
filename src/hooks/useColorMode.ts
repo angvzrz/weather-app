@@ -7,9 +7,13 @@ export function useColorMode() {
     const className = 'dark';
     const bodyClasses = window.document.body.classList;
 
-    colorMode === 'dark'
-      ? bodyClasses.add(className)
-      : bodyClasses.remove(className);
+    if (colorMode === 'dark') {
+      bodyClasses.add(className);
+      bodyClasses.add('bg-wr-oxford-blue');
+    } else {
+      bodyClasses.remove(className);
+      bodyClasses.remove('bg-wr-oxford-blue');
+    }
   }, [colorMode]);
 
   return { colorMode, setColorMode };

@@ -50,7 +50,7 @@ export function WeatherForecast({ city }: WeatherForecastProps) {
       <h2 className="w-full px-2 py-4 text-center text-xl">
         Next 5 days weather for {city}
       </h2>
-      <div className="grid h-full grid-flow-col gap-4 overflow-x-scroll">
+      <div className="grid h-full grid-flow-col gap-4 overflow-x-scroll overflow-hidden">
         {isLoaded &&
           forecastData.length > 0 &&
           forecastData.map((weatherDay, index) => (
